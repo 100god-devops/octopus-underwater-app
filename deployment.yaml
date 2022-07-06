@@ -22,7 +22,8 @@ spec:
           ports:
             - containerPort: 8085
           imagePullPolicy: Always
-
+# Service Type loadblancer 
+---
 apiVersion: v1
 kind: Service
 metadata:
