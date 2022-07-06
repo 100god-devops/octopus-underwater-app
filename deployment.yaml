@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: underwater-app-jenkins-deployment 
+  name: underwater-app-jenkins-deployment
   labels:
     app: octopus-underwater-app
 spec:
@@ -22,3 +22,17 @@ spec:
           ports:
             - containerPort: 8085
           imagePullPolicy: Always
+# Service Type loadblancer
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: underwater-app-jenkins-service
+spec:
+  selector:
+    app: octopus-underwater-app
+  ports:
+    - protocol: TCP
+      port: 8085
+      targetPort: 8085
+  type: LoadBalancer
