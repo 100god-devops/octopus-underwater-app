@@ -1,7 +1,8 @@
+echo "Deployment Started"
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: underwater-app-jenkins 
+  name: underwater-app-jenkins-deployment 
   labels:
     app: octopus-underwater-app
 spec:
@@ -20,7 +21,19 @@ spec:
         - name: octopus-underwater-app
           image: 870165402940.dkr.ecr.us-east-1.amazonaws.com/octopus-underwater-app:latest
           ports:
-            - containerPort: 80
-              protocol: TCP
+            - containerPort: 8085
           imagePullPolicy: Always
 
+echo "Service Started"
+apiVersion: v1
+kind: Service
+metadata:
+  name: underwater-app-jenkins-service
+spec:
+  selector:
+    app: octopus-underwater-app
+  ports:
+    - protocol: TCP
+      port: 8085
+      targetPort: 8085
+  type: LoadBalancer
