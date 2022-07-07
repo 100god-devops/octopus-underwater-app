@@ -32,9 +32,13 @@ pipeline {
                 }
             }
         }
-            stage('Deploy'){
-                steps {
-                        sh 'kubectl apply -f deployment.yaml --context arn:aws:eks:us-east-1:870165402940:cluster/eks-deployment'
+        stage('Deploy'){
+            steps {
+                 kubernetesDeploy(
+                        configs: 'deployment.yaml',
+                        kubeconfigId: 'K8S',
+                        enableConfigSubstitution: true
+                        )
             }
         }
 
