@@ -34,7 +34,7 @@ pipeline {
         }
             stage('Deploy'){
                 steps {
-                        sh 'kubectl apply -f deployment.yaml --context eks-deployment'
+                        sh 'kubectl apply -f deployment.yaml --context arn:aws:eks:us-east-1:870165402940:cluster/eks-deployment'
             }
         }
 
