@@ -32,13 +32,9 @@ pipeline {
                 }
             }
         }
-                stage('Deploy'){
-            steps {
-                 kubernetesDeploy(
-			configs:'octopus-underwater-app/deployment.yml',
-			kubeconfigId: 'K8S',
-			enableConfigSubstitution: true
-			)
+            stage('Deploy'){
+                steps {
+                        sh 'kubectl apply -f deployment.yaml'
             }
         }
 
